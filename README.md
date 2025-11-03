@@ -47,7 +47,7 @@
 | **servicios** | AuthService, ProductService, CartService, PurchaseService, FabricaService, TrabajadorService, ConsejoSombrioService, RegistroEsclavosService |
 | **produccion** | Fabrica |
 | **operaciones** | TrabajadorEsclavizado, RegistroEsclavos, ConsejoSombrio |
-<img width="1024" height="1024" alt="2b5ef72e-c854-476a-8dee-dc2a62959c5d" src="https://github.com/user-attachments/assets/b47b6fa5-f09d-4437-bf44-5ec940388b80" />
+<img width="1536" height="1024" alt="a5c569ab-92e3-4ddc-803f-6e616e1f42fd" src="https://github.com/user-attachments/assets/46a4356e-29e5-47c7-9ada-2f7ac6da8d15" />
 
 <h2 id="persistencia">💾 Persistencia (MySQL + JDBC)</h2> <p> El proyecto integra <b>JDBC puro</b> con <b>MySQL</b>. La conexión sale de <code>config.Database.getConnection()</code> (credenciales en <code>db.properties</code> en el classpath).<br/> La lógica de acceso a datos vive en clases <b>DAO</b> dentro de <code>servicios/</code>. </p> <p align="center"> <img alt="DB" src="https://img.shields.io/badge/MySQL-8.x-blue?logo=mysql" /> <img alt="JDBC" src="https://img.shields.io/badge/JDBC-Driver%20MySQL-informational" /> <img alt="Scope" src="https://img.shields.io/badge/persistencia-usuarios%2C%20categor%C3%ADas%2C%20productos%2C%20f%C3%A1brica%2Ftrabajador%2C%20consejos%2C%20carrito-success" /> </p>
 🔗 Configuración
