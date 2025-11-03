@@ -125,3 +125,4 @@ Duplicados: PK compuestas en tablas puente (consejo_sombrio_miembro, carrito_lin
 
 
 ---
+<img width="1280" height="360" alt="glowup-banner-dark-onyx" src="https://github.com/user-attachments/assets/302c86b8-fbea-40ce-ba1a-1209e13af300" />
