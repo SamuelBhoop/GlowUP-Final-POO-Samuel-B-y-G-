@@ -1,0 +1,3 @@
+package dominio;
+
+public enum Rol { CLIENTE, ADMIN_CONTENIDO, ADMIN_USUARIO, DESARROLLADOR_PRODUCTO, DUENA }

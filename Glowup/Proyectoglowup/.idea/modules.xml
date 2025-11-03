@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Proyectoglowup.iml" filepath="$PROJECT_DIR$/Proyectoglowup.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Proyecto-GlowUp-POO-Samuel-G-y-B--master/glowup-console/glowup-console.iml" filepath="$PROJECT_DIR$/Proyecto-GlowUp-POO-Samuel-G-y-B--master/glowup-console/glowup-console.iml" />
+    </modules>
+  </component>
+</project>
