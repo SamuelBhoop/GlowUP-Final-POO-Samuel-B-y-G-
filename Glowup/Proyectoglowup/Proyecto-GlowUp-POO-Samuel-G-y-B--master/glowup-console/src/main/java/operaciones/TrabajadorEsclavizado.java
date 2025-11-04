@@ -12,7 +12,7 @@ public class TrabajadorEsclavizado {
     private int edad;
     private LocalDate fechaCaptura;
     private String salud;
-    private Fabrica asignadoA; // many -> one
+    private Fabrica asignadoA;
 
     public TrabajadorEsclavizado(String id, String nombre, String paisOrigen, int edad,
                                  LocalDate fechaCaptura, String salud) {

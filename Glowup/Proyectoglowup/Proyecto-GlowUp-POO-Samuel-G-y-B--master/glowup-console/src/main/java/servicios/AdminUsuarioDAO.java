@@ -16,7 +16,6 @@ public class AdminUsuarioDAO {
         System.out.println(" [DAO DEBUG] Nivel Privilegio: " + admin.getNivelPrivilegio());
         System.out.println(" [DAO DEBUG] Permisos: " + admin.getPermisosAdministracion());
 
-        // Verificar si el email ya existe
         if (existeEmail(admin.getEmail())) {
             throw new RuntimeException("El email '" + admin.getEmail() + "' ya está registrado");
         }
@@ -30,19 +29,17 @@ public class AdminUsuarioDAO {
             conn.setAutoCommit(false);
 
             try {
-                // 1. Insertar en usuario
                 System.out.println(" [DAO DEBUG] Insertando en tabla usuario...");
                 try (PreparedStatement stmt = conn.prepareStatement(sqlUsuario)) {
                     stmt.setString(1, admin.getId());
                     stmt.setString(2, admin.getNombre());
                     stmt.setString(3, admin.getEmail());
-                    stmt.setString(4, admin.getPasswordHash());  // ✅ CAMBIO AQUÍ
+                    stmt.setString(4, admin.getPasswordHash());
                     stmt.setString(5, admin.getRol().name());
                     int filas = stmt.executeUpdate();
                     System.out.println("✅ [DAO DEBUG] Usuario insertado: " + filas + " filas");
                 }
 
-                // 2. Insertar en administrador_usuario
                 System.out.println(" [DAO DEBUG] Insertando en tabla administrador_usuario...");
                 try (PreparedStatement stmt = conn.prepareStatement(sqlAdmin)) {
                     stmt.setString(1, admin.getId());
@@ -53,7 +50,6 @@ public class AdminUsuarioDAO {
                     System.out.println("✅ [DAO DEBUG] AdminUsuario insertado: " + filas + " filas");
                 }
 
-                // 3. Insertar permisos
                 System.out.println(" [DAO DEBUG] Insertando permisos...");
                 try (PreparedStatement stmt = conn.prepareStatement(sqlPermisos)) {
                     int contadorPermisos = 0;
@@ -63,27 +59,27 @@ public class AdminUsuarioDAO {
                         stmt.setString(3, permiso);
                         stmt.executeUpdate();
                         contadorPermisos++;
-                        System.out.println("✅ [DAO DEBUG] Permiso insertado: " + permiso);
+                        System.out.println(" [DAO DEBUG] Permiso insertado: " + permiso);
                     }
-                    System.out.println("✅ [DAO DEBUG] Total permisos insertados: " + contadorPermisos);
+                    System.out.println(" [DAO DEBUG] Total permisos insertados: " + contadorPermisos);
                 }
 
                 conn.commit();
-                System.out.println("🎉 [DAO DEBUG] TRANSACCIÓN COMPLETADA EXITOSAMENTE");
+                System.out.println(" [DAO DEBUG] TRANSACCIÓN COMPLETADA EXITOSAMENTE");
 
             } catch (SQLException e) {
                 conn.rollback();
-                System.out.println("❌ [DAO ERROR] Error en transacción - Rollback: " + e.getMessage());
+                System.out.println(" [DAO ERROR] Error en transacción - Rollback: " + e.getMessage());
                 throw e;
             }
 
         } catch (SQLException e) {
-            System.out.println("❌ [DAO ERROR] Error de conexión: " + e.getMessage());
+            System.out.println(" [DAO ERROR] Error de conexión: " + e.getMessage());
             throw new RuntimeException("Error guardando AdminUsuario: " + e.getMessage(), e);
         }
     }
 
-    // Método para verificar email
+
     private boolean existeEmail(String email) {
         String sql = "SELECT 1 FROM usuario WHERE email = ?";
         try (Connection conn = Database.getConnection();
@@ -214,7 +210,7 @@ public class AdminUsuarioDAO {
                 try (PreparedStatement stmt = conn.prepareStatement(sqlUsuario)) {
                     stmt.setString(1, admin.getNombre());
                     stmt.setString(2, admin.getEmail());
-                    stmt.setString(3, admin.getPasswordHash());  // ✅ CAMBIO AQUÍ
+                    stmt.setString(3, admin.getPasswordHash());
                     stmt.setString(4, admin.getId());
                     stmt.executeUpdate();
                 }

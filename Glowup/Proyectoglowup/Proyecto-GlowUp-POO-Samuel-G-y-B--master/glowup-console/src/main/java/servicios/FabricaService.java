@@ -6,7 +6,7 @@ import operaciones.TrabajadorEsclavizado;
 import java.util.*;
 
 public class FabricaService {
-    private final Map<String, Fabrica> fabricas = new HashMap<>(); // id -> Fabrica
+    private final Map<String, Fabrica> fabricas = new HashMap<>();
 
     public Fabrica crear(String id, String pais, String ciudad, int capacidad, String nivelAutomatizacion) {
         Fabrica f = new Fabrica(id, pais, ciudad, capacidad, nivelAutomatizacion);

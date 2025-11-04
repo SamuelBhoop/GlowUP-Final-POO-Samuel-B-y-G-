@@ -19,22 +19,18 @@ public class ProductService {
         System.out.println("[SERVICE] Producto agregado a BD: " + p.getNombre());
     }
 
-    // Elimina esta línea ya que no se usa y causa confusión
-    // private List<Producto> productos;
+
 
     public Producto buscarPorId(String productoId) {
         Optional<Producto> producto = productDAO.buscarPorId(productoId);
         return producto.orElse(null);
     }
 
-    // Método para buscar por int (sobrecarga)
     public Producto buscarPorId(int productoId) {
         return buscarPorId(String.valueOf(productoId));
     }
 
-    // MÉTODO NUEVO: obtener o crear categoría
     public Categoria obtenerOCrearCategoria(String nombre, String descripcion) {
-        // Buscar si ya existe una categoría con ese nombre
         List<Categoria> categorias = categoriaDAO.listarTodas();
         Optional<Categoria> existente = categorias.stream()
                 .filter(cat -> cat.getNombre().equalsIgnoreCase(nombre))
@@ -48,14 +44,12 @@ public class ProductService {
         }
     }
 
-    // MÉTODO NUEVO: listar productos ordenados por nombre
     public List<Producto> listarProductosOrdenadosPorNombre() {
         List<Producto> productos = productDAO.listarTodos();
         productos.sort(Comparator.comparing(Producto::getNombre));
         return productos;
     }
 
-    // MÉTODO NUEVO: listar todos los productos
     public List<Producto> listarTodos() {
         return productDAO.listarTodos();
     }
@@ -72,7 +66,6 @@ public class ProductService {
         return categoriaDAO.listarTodas();
     }
 
-    // Método para crear nueva categoría si es necesario
     public Categoria crearCategoria(String nombre, String descripcion) {
         String id = UUID.randomUUID().toString();
         Categoria cat = new Categoria(id, nombre, descripcion);

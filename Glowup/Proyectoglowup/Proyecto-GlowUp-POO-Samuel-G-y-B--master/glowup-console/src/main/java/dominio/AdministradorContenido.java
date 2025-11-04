@@ -133,9 +133,8 @@ public class AdministradorContenido extends Usuario {
         System.out.println("Permisos: " + String.join(", ", permisosEdicion));
     }
 
-    // === GETTERS ===
     public Set<String> getPermisosEdicion() {
-        return new HashSet<>(permisosEdicion); // Copia defensiva
+        return new HashSet<>(permisosEdicion);
     }
 
     public LocalDateTime getFechaContratacion() {
@@ -154,7 +153,6 @@ public class AdministradorContenido extends Usuario {
         return activo;
     }
 
-    // === MÉTODO TO STRING MEJORADO ===
     @Override
     public String toString() {
         return String.format(

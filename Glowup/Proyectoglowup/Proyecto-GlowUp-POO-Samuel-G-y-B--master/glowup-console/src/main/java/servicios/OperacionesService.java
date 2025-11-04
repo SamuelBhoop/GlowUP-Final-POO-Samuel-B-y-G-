@@ -45,18 +45,14 @@ public class OperacionesService {
             throw new RuntimeException("Solo la Dueña puede listar trabajadores");
         }
 
-        // Obtener de BD
         List<TrabajadorEsclavizado> trabajadoresBD = trabajadorService.listar();
 
-        // Sincronizar con registro (pero sin limpiarlo completamente)
         for (TrabajadorEsclavizado t : trabajadoresBD) {
             try {
-                // Solo agregar si no existe
                 if (registro.buscar(duena, t.getId()).isEmpty()) {
                     registro.registrar(duena, t);
                 }
             } catch (Exception e) {
-                // Ignorar errores de sincronización
             }
         }
 

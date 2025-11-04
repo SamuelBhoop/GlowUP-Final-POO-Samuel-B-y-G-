@@ -35,7 +35,6 @@ public class Fabrica {
 
     public Set<TrabajadorEsclavizado> getPersonal() { return Set.copyOf(personal); }
 
-    // Relación bidireccional
     public void agregarTrabajador(TrabajadorEsclavizado t) {
         if (t == null) return;
         if (personal.add(t)) {

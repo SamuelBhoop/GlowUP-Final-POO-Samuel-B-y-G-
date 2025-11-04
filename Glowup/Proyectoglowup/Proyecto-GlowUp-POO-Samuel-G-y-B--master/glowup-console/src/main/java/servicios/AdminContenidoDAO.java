@@ -32,7 +32,7 @@ public class AdminContenidoDAO {
                     stmt.setString(1, admin.getId());
                     stmt.setString(2, admin.getNombre());
                     stmt.setString(3, admin.getEmail());
-                    stmt.setString(4, admin.getPasswordHash());  // ✅ CAMBIO AQUÍ
+                    stmt.setString(4, admin.getPasswordHash());
                     stmt.setString(5, admin.getRol().name());
                     int filas = stmt.executeUpdate();
                     System.out.println("✅ [DAO DEBUG] Usuario insertado: " + filas + " filas");

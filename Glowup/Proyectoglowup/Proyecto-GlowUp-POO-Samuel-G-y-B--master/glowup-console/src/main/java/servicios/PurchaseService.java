@@ -21,14 +21,12 @@ public class PurchaseService {
         this.producto = productos;
     }
 
-    // Debes tener una instancia de ProductService en tu clase
     private ProductService productService = new ProductService();
 
     public Compra checkout(Cliente cliente, Carrito carrito, MetodoPago mp) {
         List<LineaCompra> lineasCompra = new ArrayList<>();
 
         for (LineaCarrito lc : carrito.getLineas()) {
-            // Usar la instancia en lugar de la clase
             Producto p = productService.buscarPorId(lc.getProducto().getId());
 
             if (p.getStock() < lc.getCantidad()) {

@@ -13,19 +13,16 @@ public final class Database {
 
     static {
         try {
-            // 1) classpath (resources)
             InputStream in = Thread.currentThread()
                     .getContextClassLoader()
                     .getResourceAsStream("db.properties");
             if (in == null) in = Database.class.getResourceAsStream("/db.properties");
 
-            // 2) archivo junto al proceso (working dir)
             if (in == null) {
                 Path p = Path.of(System.getProperty("user.dir"), "db.properties");
                 if (Files.exists(p)) in = Files.newInputStream(p);
             }
 
-            // 3) archivo de dev: src/main/resources (por si ejecutas desde IDE)
             if (in == null) {
                 Path p = Path.of(System.getProperty("user.dir"), "src", "main", "resources", "db.properties");
                 if (Files.exists(p)) in = Files.newInputStream(p);

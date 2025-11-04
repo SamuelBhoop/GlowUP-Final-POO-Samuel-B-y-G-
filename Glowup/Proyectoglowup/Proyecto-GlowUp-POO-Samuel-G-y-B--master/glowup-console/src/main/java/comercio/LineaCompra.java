@@ -22,7 +22,7 @@ public class LineaCompra {
 
     private double calcularTotal(List<LineaCompra> lineasCompra) {
         return lineasCompra.stream()
-                .mapToDouble(LineaCompra::getSubtotal)  // Esta es la mejor opción
+                .mapToDouble(LineaCompra::getSubtotal)
                 .sum();
     }
 }

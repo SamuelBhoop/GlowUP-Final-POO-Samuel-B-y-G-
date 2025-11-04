@@ -9,11 +9,9 @@ import java.util.List;
 
 public class CartService {
     private final CarritoDAO carritoDAO = new CarritoDAO();
-    private ProductService productService; // Solo declarar, no inicializar aquí
-
+    private ProductService productService;
     public CartService(ProductService productService) {
-        this.productService = productService; // Recibir por parámetro
-        // ELIMINA esta línea: private CartService cartService = new CartService(productService);
+        this.productService = productService;
     }
 
     public Carrito obtenerCarrito(Cliente cliente) {

@@ -15,7 +15,6 @@ public class AuthService {
             throw new RuntimeException("Email ya registrado");
         }
 
-        // SOLO guardar Clientes en BD
         if (usuario instanceof Cliente cliente) {
             try {
                 usuarioDAO.insertarCliente(cliente);
@@ -25,14 +24,12 @@ public class AuthService {
             }
         }
 
-        // Todos los usuarios van a memoria
         usuariosPorEmail.put(usuario.getEmail(), usuario);
     }
 
     public Usuario login(String email, String password) {
         Usuario usuario = usuariosPorEmail.get(email);
 
-        // Si no está en memoria, intentar cargar Cliente desde BD
         if (usuario == null) {
             usuario = cargarClienteDesdeBD(email, password);
         }

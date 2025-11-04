@@ -207,7 +207,6 @@ public class ConsejoSombrioDAO {
         String id = rs.getString("id");
         String nombre = rs.getString("nombre");
         String email = rs.getString("email");
-        // En tu DB esta columna "password" ya es el hash (úsalo tal cual)
         String passwordHash = rs.getString("password");
         Rol rol = Rol.valueOf(rs.getString("rol"));
         boolean activo = rs.getBoolean("activo");

@@ -68,6 +68,8 @@ public class Main {
             System.out.println("6) Ver mi carrito");
             System.out.println("7) Registrar compra (checkout)");
             System.out.println("8) Módulo académico (Solo Dueña)");
+            System.out.println("9) Agregar categoría (AdminContenido/Dueña)");
+            System.out.println("10) Listar categorías");
             System.out.println("0) Salir");
             System.out.print("Opción: ");
             String op = sc.nextLine().trim();
@@ -82,13 +84,16 @@ public class Main {
                     case "6" -> verCarrito(usuarioActual, carritos);
                     case "7" -> checkout(usuarioActual, carritos, compras);
                     case "8" -> moduloAcademico(usuarioActual, duena, produccion, operaciones, auth, fabricas, trabajadores, consejos, registroSrv);
+                    case "9"  -> agregarCategoria(usuarioActual);
+                    case "10" -> listarCategorias();
+
                     case "0" -> {
                         System.out.println("\n¡Gracias por usar GlowUp! ¡Hasta pronto! ");
                         return;
                     }
-
                     default -> System.out.println("Opción no válida");
                 }
+
             } catch (RuntimeException ex) {
                 System.out.println("⚠ " + ex.getMessage());
             }
@@ -150,6 +155,45 @@ public class Main {
         new ProductDAO().insertar(p);
         System.out.println("✔ Producto creado: " + p.getNombre() + " | ID: " + p.getId());
     }
+    private static void agregarCategoria(Usuario u) {
+        if (u == null || !(u instanceof AdministradorContenido || u instanceof Duena)) {
+            throw new RuntimeException("Acceso restringido: solo Dueña o Administrador de Contenido.");
+        }
+
+        System.out.println("\n-- Agregar categoría --");
+        System.out.print("Nombre: ");
+        String nombre = sc.nextLine().trim();
+        System.out.print("Descripción (opcional): ");
+        String descripcion = sc.nextLine().trim();
+
+        if (nombre.isEmpty()) throw new RuntimeException("El nombre no puede estar vacío.");
+
+        var dao = new CategoriaDAO();
+        var cat = new comercio.Categoria(
+                java.util.UUID.randomUUID().toString(),
+                nombre,
+                descripcion.isBlank() ? null : descripcion
+        );
+
+        dao.insertar(cat);
+        System.out.println("✔ Categoría creada. ID: " + cat.getId());
+        System.out.println("   (Usa este ID cuando agregues productos).");
+    }
+
+    private static void listarCategorias() {
+        System.out.println("\n-- Categorías --");
+        var dao = new CategoriaDAO();
+        var lista = dao.listarTodas();
+        if (lista.isEmpty()) {
+            System.out.println("(sin categorías)");
+            return;
+        }
+        lista.forEach(c ->
+                System.out.printf(" - %s | %s | %s%n",
+                        c.getId(), c.getNombre(),
+                        c.getDescripcion() == null ? "" : c.getDescripcion())
+        );
+    }
 
     private static Categoria pedirCategoriaExistente(Scanner sc, CategoriaDAO catDao) {
         var cats = catDao.listarTodas();
@@ -173,7 +217,7 @@ public class Main {
 
     private static void listarProductos(ProductService productos) {
         System.out.println("-- Catálogo --");
-        var lista = new ProductDAO().listarConCategoria();  // <- usa el JOIN
+        var lista = new ProductDAO().listarConCategoria();
         lista.forEach(p -> System.out.println(p.resumen()));
     }
 
