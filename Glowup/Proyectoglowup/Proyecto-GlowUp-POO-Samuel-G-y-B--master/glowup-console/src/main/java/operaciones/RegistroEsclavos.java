@@ -6,11 +6,10 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 public class RegistroEsclavos {
-    private final Duena duena; // control exclusivo
+    private final Duena duena;
     private LocalDateTime ultimoAcceso;
-    private int nivelCifrado; // 1..5
-    private final Map<String, TrabajadorEsclavizado> registros = new HashMap<>(); // id -> trabajador
-
+    private int nivelCifrado;
+    private final Map<String, TrabajadorEsclavizado> registros = new HashMap<>();
     public RegistroEsclavos(Duena duena, int nivelCifrado) {
         this.duena = Objects.requireNonNull(duena);
         this.nivelCifrado = nivelCifrado;
